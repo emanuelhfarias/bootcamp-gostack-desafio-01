@@ -8,7 +8,14 @@ const express = require('express');
 const app = express();
 app.use(express.json());
 
+let quantidadeAcessos = 0;
 const projects = [];
+
+app.use((req, res, next) => {
+  quantidadeAcessos += 1;
+  console.log(`Acessos: ${quantidadeAcessos}`);
+  next();
+});
 
 function checkProjectExist(req, res, next) {
   const { id } = req.params;
