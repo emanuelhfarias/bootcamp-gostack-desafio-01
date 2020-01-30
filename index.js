@@ -19,8 +19,8 @@ app.use((req, res, next) => {
 
 function checkProjectExist(req, res, next) {
   const { id } = req.params;
-  const index = projects.findIndex(elem => elem.id == id);
-  if (index < 0) {
+  const project = projects.find(elem => elem.id == id);
+  if (!project) {
     return res.status(400).json({error: 'Project does not exist.'});
   }
   next();
@@ -42,8 +42,8 @@ app.get('/projects', (_, res) => {
 app.put('/projects/:id', checkProjectExist, (req, res) => {
   const { id } = req.params;
   const { title } = req.body;
-  const index = projects.findIndex(elem => elem.id == id);
-  projects[index].title = title;
+  const project = projects.find(elem => elem.id == id);
+  project.title = title;
   res.json(projects);
 });
 
@@ -58,8 +58,8 @@ app.delete('/projects/:id', checkProjectExist, (req, res) => {
 app.post('/projects/:id/tasks', checkProjectExist, (req, res) => {
   const { id } = req.params;
   const { title } = req.body;
-  const index = projects.findIndex(elem => elem.id == id);
-  projects[index].tasks.push(title);
+  const project = projects.find(elem => elem.id == id);
+  project.tasks.push(title);
   res.json(projects);
 });
 
