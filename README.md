@@ -9,3 +9,5 @@ cd bootcamp-gostack-desafio-01
 yarn
 yarn dev
 ```
+
+[projeto relacionado](https://github.com/JoseMurilloc/desafio-01-rocketseat)
